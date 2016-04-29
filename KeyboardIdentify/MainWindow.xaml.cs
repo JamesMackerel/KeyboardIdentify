@@ -131,5 +131,15 @@ namespace KeyboardIdentify
             ComboBox cb = sender as ComboBox;
             ExperimentGrid.DataContext = cb.SelectedItem as ExperimentModel;
         }
+
+        private bool isStart;
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+        }
     }
 }

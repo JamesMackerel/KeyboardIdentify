@@ -29,15 +29,15 @@
                     <Button Grid.Column="2" Margin="5" Name="NewExperiment" Content="New Experiment" HorizontalAlignment="Right" Click="NewExperiment_Click"/>
 
                     <Label Grid.Column="0" Grid.Row="1" Content="Password:" Margin="5"/>
-                    <TextBox Grid.Column="1" Grid.Row="1" Margin="5" Grid.ColumnSpan="2" Text="{Binding Path=Password}"/>
+                    <TextBox Name="PasswordShow" Grid.Column="1" Grid.Row="1" Margin="5" Grid.ColumnSpan="2" Text="{Binding Path=Password}" IsReadOnly="True"/>
 
                     <Label Grid.Column="0" Grid.Row="2" Margin="5" Content="Input:"/>
-                    <TextBox Grid.Column="1" Grid.Row="2" Margin="5" />
+                    <TextBox Name="InputBox" Grid.Column="1" Grid.Row="2" Margin="5" />
 
                     <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="2" Margin="5">
-                        <Button Content="Start"  Margin="5"/>
-                        <Button Content="Over"  Margin="5"/>
-                        <Button Content="Test"  Margin="5"/>
+                        <Button Name="StartButton" Content="Start"  Margin="5" Click="StartButton_Click"/>
+                        <Button Name="OverButton" Content="Over"  Margin="5" Click="OverButton_Click"/>
+                        <Button Name="TestButton" Content="Test"  Margin="5" Click="TestButton_Click"/>
                     </StackPanel>
                     
                 </Grid>

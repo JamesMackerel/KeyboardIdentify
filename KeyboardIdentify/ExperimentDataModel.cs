@@ -16,6 +16,7 @@ namespace KeyboardIdentify
         public event PropertyChangedEventHandler PropertyChanged;
 
         private int id;
+        private int exp_id;
         private string data;
 
         public ExperimentDataModel()
@@ -23,22 +24,23 @@ namespace KeyboardIdentify
 
         }
 
-        public ExperimentDataModel(int id, string data)
+        public ExperimentDataModel(int? id, string data, int exp_id)
         {
-            this.id = id;
+            this.id = id==null? -1:(int)id;
+            this.exp_id = exp_id;
             this.data = data;
         }
 
-        public int Id
+        public int ExpId
         {
             get
             {
-                return id;
+                return exp_id;
             }
 
             set
             {
-                id = value;
+                exp_id = value;
             }
         }
 
@@ -56,6 +58,19 @@ namespace KeyboardIdentify
             }
         }
 
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+            }
+        }
+
         public void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             if(PropertyChanged != null)
@@ -69,8 +84,9 @@ namespace KeyboardIdentify
             SqlConnection conn = new SqlConnection(DatabaseManager.ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
-            cmd.CommandText = "INSERT INTO [data] (data) VALUES(@data)";
+            cmd.CommandText = "INSERT INTO [data] (data, experiment_id) VALUES(@data, @exp_id)";
             cmd.Parameters.AddWithValue("@data", data);
+            cmd.Parameters.AddWithValue("@exp_id", exp_id);
 
             try
             {

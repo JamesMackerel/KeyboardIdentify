@@ -80,7 +80,7 @@ namespace KeyboardIdentify
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    ModelList.Add(new ExperimentDataModel((int)reader[0], (string)reader[1]));
+                    ModelList.Add(new ExperimentDataModel((int)reader[0], (string)reader[1], (int)reader[2]));
                 }
             }
             finally

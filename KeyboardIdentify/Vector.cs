@@ -11,10 +11,12 @@ using System.IO;
 
 namespace KeyboardIdentify
 {
-    [Serializable]
-    public class Vector
+    /// <summary>
+    /// Represent a vector.
+    /// </summary>
+    public class Vector 
     {
-        private List<double> vector;
+        public List<double> vector;
 
         public double this[int index]
         {
@@ -28,11 +30,57 @@ namespace KeyboardIdentify
             }
         }
 
+        public int Dimension
+        {
+            get
+            {
+                return vector.Count;
+            }
+        }
+
         public Vector()
         {
             vector = new List<double>();
         }
 
+        public Vector(double[] array)
+        {
+            vector = new List<double>(array);
+        }
+
+        public Vector(ICollection<double> array)
+        {
+            vector = new List<double>();
+            foreach(double i in array)
+            {
+                vector.Add(i);
+            }
+        }
+
+        /// <summary>
+        /// Caculate distance between 2 vectors.
+        /// </summary>
+        /// <param name="v">another vector</param>
+        /// <returns>distance</returns>
+        public double DistanceBetween(Vector v)
+        {
+            if(v.Dimension != Dimension)
+            {
+                throw new ArgumentException("Dimension not equal!");
+            }
+            double distance = 0;
+            for (int iter = 0; iter < Dimension; ++iter)
+            {
+                distance += Math.Pow(this[iter] + v[iter], 2);
+            }
+            return Math.Sqrt(distance);
+        }
+
+        /// <summary>
+        /// deserialize a vector from xml
+        /// </summary>
+        /// <param name="reader">a XmlReader</param>
+        /// <returns>a vector object</returns>
         public static Vector GetVectorFromXml(XmlReader reader)
         {
             XmlSerializer x = new XmlSerializer(typeof(Vector));
@@ -50,6 +98,10 @@ namespace KeyboardIdentify
             return v;
         }
 
+        /// <summary>
+        /// serizlize a vector object to xml document
+        /// </summary>
+        /// <returns>a string object that contains a serialized vector object.</returns>
         public override string ToString()
         {
             XmlSerializer x = new XmlSerializer(this.GetType());
